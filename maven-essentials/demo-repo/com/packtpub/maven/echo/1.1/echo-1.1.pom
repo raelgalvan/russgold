@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.packtpub.maven</groupId>
+    <artifactId>echo</artifactId>
+    <version>1.1</version>
+
+    <name>Echo</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>echo</id>
+            <activation>
+                <property>
+                    <name>my.arg</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.2.1</version>
+                        <executions>
+                          <execution>
+                              <phase>integration-test</phase>
+                            <goals>
+                              <goal>java</goal>
+                            </goals>
+                          </execution>
+                        </executions>
+                        <configuration>
+                            <mainClass>com.packtpub.maven.Greetings</mainClass>
+                            <arguments>
+                                <argument>${my.arg}</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>
